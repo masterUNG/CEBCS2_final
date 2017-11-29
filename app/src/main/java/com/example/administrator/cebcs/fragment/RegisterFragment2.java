@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,11 @@ import android.widget.EditText;
 import com.example.administrator.cebcs.MainActivity;
 import com.example.administrator.cebcs.R;
 import com.example.administrator.cebcs.unity.MyAlert;
+import com.example.administrator.cebcs.unity.MyConstant;
+import com.example.administrator.cebcs.unity.MyGetAllData;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * Created by masterung on 29/11/2017 AD.
@@ -21,6 +27,7 @@ import com.example.administrator.cebcs.unity.MyAlert;
 public class RegisterFragment2 extends Fragment {
 
     private String idStudentString, passwordString, rePasswordString;
+    private boolean statusABoolean = true; //true ==> สมัครไปแล้ว false ==> ยังไม่เคยสมัคร
 
 
     @Override
@@ -58,11 +65,68 @@ public class RegisterFragment2 extends Fragment {
                 } else if (!(idStudentString.length() == 13)) {
 //                    idStudentString Not 13digi
                     myAlert.myDialog(getString(R.string.id_false), getString(R.string.mess_id_false));
+                } else if (checkIdStudent()) {
+//                    true ==> idStudentString ไม่มีในฐานข้อมูล
+                    myAlert.myDialog(getString(R.string.id_false), getString(R.string.message_no_id));
+                } else if (statusABoolean) {
+                    //true ==> สมัครไปแล้ว
+                    myAlert.myDialog(getString(R.string.id_false), getString(R.string.id_registed));
+                } else if (!(passwordString.equals(rePasswordString))) {
+//                    Password ไม่ตรงกัน
+                    myAlert.myDialog(getString(R.string.pass_false), getString(R.string.mass_pass_false));
+                } else {
+                    registerPassword();
                 }
+
+
 
 
             }
         });
+    }
+
+    private void registerPassword() {
+
+    }
+
+    private boolean checkIdStudent() {
+
+//        return true ==> idStudentString ไม่มีในฐานข้อมูล
+//        return false ==> idStudentString มีในฐานข้อมูล
+
+        String tag = "29novV1";
+        boolean result = true;
+        MyConstant myConstant = new MyConstant();
+
+        try {
+
+            MyGetAllData myGetAllData = new MyGetAllData(getActivity());
+            myGetAllData.execute(myConstant.getUrlgetUserString());
+            String strJSON = myGetAllData.get();
+            Log.d(tag, "JSON ==> " + strJSON);
+
+            JSONArray jsonArray = new JSONArray(strJSON);
+            for (int i=0;i<jsonArray.length();i+=1) {
+
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                if (idStudentString.equals(jsonObject.getString("idStudent"))) {
+                    result = false;
+                    if (jsonObject.getString("Password").isEmpty()) {
+                        statusABoolean = false;
+                    }
+                }
+
+            }
+            Log.d(tag, "Result => " + result);
+            return result;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return result;
+        }
+
+
+
     }
 
     private void toolbar() {

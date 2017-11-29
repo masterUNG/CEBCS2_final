@@ -36,6 +36,8 @@
     <string name="id_student13digi">รหัสนักศึกษา 13 หลัก :</string>
     <string name="pass1">รหัสผ่าน :</string>
     <string name="pass2">ยืนยันรหัสผ่าน :</string>
+    <string name="message_no_id">ไม่มี ID นี่ในฐานข้อมูล</string>
+    <string name="id_registed">Id นี่สมัครไปแล้ว</string>
 
 
 </resources>
