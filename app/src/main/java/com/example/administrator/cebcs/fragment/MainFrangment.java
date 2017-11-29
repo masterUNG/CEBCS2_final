@@ -101,6 +101,7 @@ public class MainFrangment extends Fragment {
                     for (int i1=0; i1<columnStrings.length; i1+=1) {
 
                         loginStrings[i1] = jsonObject.getString(columnStrings[i1]);
+                        Log.d("29novV2", "login[" + i1 + "] ==> " + loginStrings[i1]);
 
                     }
 
@@ -110,7 +111,7 @@ public class MainFrangment extends Fragment {
 
             if (bolStatus) {
                 myAlert.myDialog("ID False", "No This ID in my Database");
-            } else if (edtPasswordString.equals(loginStrings[5])) {
+            } else if (edtPasswordString.equals(loginStrings[6])) {
 
                 Toast.makeText(getActivity(), "Welcome " + loginStrings[2],
                         Toast.LENGTH_SHORT).show();
