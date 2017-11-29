@@ -50,12 +50,14 @@ public class RegisterFragment2 extends Fragment {
                 passwordString = passwordEditText.getText().toString().trim();
                 rePasswordString = rePasswordEditText.getText().toString().trim();
 
+                MyAlert myAlert = new MyAlert(getActivity());
+
                 if (idStudentString.isEmpty() || passwordString.isEmpty() || rePasswordString.isEmpty()) {
-
 //                    Have Space
-                    MyAlert myAlert = new MyAlert(getActivity());
                     myAlert.myDialog(getString(R.string.have_space), getString(R.string.message_have_space));
-
+                } else if (!(idStudentString.length() == 13)) {
+//                    idStudentString Not 13digi
+                    myAlert.myDialog(getString(R.string.id_false), getString(R.string.mess_id_false));
                 }
 
 
