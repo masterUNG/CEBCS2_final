@@ -16,6 +16,8 @@ public class MyConstant {
 
     private String urlGetCEwhereIDstudent = "http://androidthai.in.th/12Sep/getCEWhereIDstudent.php";
 
+    private String urlEditPassWordWhereIdStudent = "http://androidthai.in.th/12Sep/editPasswordWhereIdStudent.php";
+
     private String[] columnUserStrings = new String[]{
             "id",
             "idStudent",
@@ -51,6 +53,10 @@ public class MyConstant {
             "ห้อง 2/3",
             "ห้อง 2/4"
     };
+
+    public String getUrlEditPassWordWhereIdStudent() {
+        return urlEditPassWordWhereIdStudent;
+    }
 
     public String getUrlGetCEwhereIDstudent() {
         return urlGetCEwhereIDstudent;

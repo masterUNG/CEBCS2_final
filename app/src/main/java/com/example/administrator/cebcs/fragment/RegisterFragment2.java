@@ -10,9 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.administrator.cebcs.MainActivity;
 import com.example.administrator.cebcs.R;
+import com.example.administrator.cebcs.unity.EditPassWherIdStudent;
 import com.example.administrator.cebcs.unity.MyAlert;
 import com.example.administrator.cebcs.unity.MyConstant;
 import com.example.administrator.cebcs.unity.MyGetAllData;
@@ -86,6 +88,22 @@ public class RegisterFragment2 extends Fragment {
     }
 
     private void registerPassword() {
+
+        try {
+
+            MyConstant myConstant = new MyConstant();
+            EditPassWherIdStudent editPassWherIdStudent = new EditPassWherIdStudent(getActivity());
+            editPassWherIdStudent.execute(idStudentString, passwordString, myConstant.getUrlEditPassWordWhereIdStudent());
+
+            if (Boolean.parseBoolean(editPassWherIdStudent.get())) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            } else {
+                Toast.makeText(getActivity(), "Cannot Upload New User", Toast.LENGTH_SHORT).show();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
