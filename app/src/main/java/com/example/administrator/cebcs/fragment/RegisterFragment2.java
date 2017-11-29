@@ -7,15 +7,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.administrator.cebcs.MainActivity;
 import com.example.administrator.cebcs.R;
+import com.example.administrator.cebcs.unity.MyAlert;
 
 /**
  * Created by masterung on 29/11/2017 AD.
  */
 
-public class RegisterFragment2 extends Fragment{
+public class RegisterFragment2 extends Fragment {
+
+    private String idStudentString, passwordString, rePasswordString;
 
 
     @Override
@@ -26,9 +31,37 @@ public class RegisterFragment2 extends Fragment{
         toolbar();
 
 //        Save Controller
+        saveController();
 
 
     }   // Main Method
+
+    private void saveController() {
+        Button button = getView().findViewById(R.id.btnSave);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                EditText idStudentEditText = getView().findViewById(R.id.edtIDstudent);
+                EditText passwordEditText = getView().findViewById(R.id.edtPassword);
+                EditText rePasswordEditText = getView().findViewById(R.id.edtRePassword);
+
+                idStudentString = idStudentEditText.getText().toString().trim();
+                passwordString = passwordEditText.getText().toString().trim();
+                rePasswordString = rePasswordEditText.getText().toString().trim();
+
+                if (idStudentString.isEmpty() || passwordString.isEmpty() || rePasswordString.isEmpty()) {
+
+//                    Have Space
+                    MyAlert myAlert = new MyAlert(getActivity());
+                    myAlert.myDialog(getString(R.string.have_space), getString(R.string.message_have_space));
+
+                }
+
+
+            }
+        });
+    }
 
     private void toolbar() {
         Toolbar toolbar = getView().findViewById(R.id.toolberRegister2);
