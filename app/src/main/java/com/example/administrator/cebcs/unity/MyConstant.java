@@ -18,6 +18,8 @@ public class MyConstant {
 
     private String urlEditPassWordWhereIdStudent = "http://androidthai.in.th/12Sep/editPasswordWhereIdStudent.php";
 
+    private String urlGetSubjectWhereIdSub = "http://androidthai.in.th/12Sep/getSubjectWhereCE.php";
+
     private String[] columnUserStrings = new String[]{
             "id",
             "idStudent",
@@ -53,6 +55,10 @@ public class MyConstant {
             "ห้อง 2/3",
             "ห้อง 2/4"
     };
+
+    public String getUrlGetSubjectWhereIdSub() {
+        return urlGetSubjectWhereIdSub;
+    }
 
     public String getUrlEditPassWordWhereIdStudent() {
         return urlEditPassWordWhereIdStudent;

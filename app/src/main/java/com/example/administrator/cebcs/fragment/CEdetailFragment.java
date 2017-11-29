@@ -11,6 +11,8 @@ import android.widget.ListView;
 
 import com.example.administrator.cebcs.R;
 import com.example.administrator.cebcs.unity.GetCEwhereIDstudent;
+import com.example.administrator.cebcs.unity.GetSubjectWhereIdSubject;
+import com.example.administrator.cebcs.unity.MyAdapter;
 import com.example.administrator.cebcs.unity.MyConstant;
 
 import org.json.JSONArray;
@@ -71,14 +73,50 @@ public class CEdetailFragment extends Fragment {
             Log.d(tag, "ce ที่ตัด [] แล้ว ==> " + ceString);
 
             String[] ceStrings = ceString.split(",");
+            String[] ceSubjectStrings = new String[ceStrings.length];
+            String[] numberStrings = new String[ceStrings.length];
+            int intNumber = 0;
+
             for (int i=0; i<ceStrings.length; i+=1) {
                 Log.d(tag, "ceStrings[" + i + "] ==> " + ceStrings[i]);
+                ceSubjectStrings[i] = findSubject(ceStrings[i]);
+                Log.d(tag, "Subject[" + i + "] ==> " + ceSubjectStrings[i]);
+                numberStrings[i] = Integer.toString(intNumber += 1);
             }
+
+            MyAdapter myAdapter = new MyAdapter(getActivity(), ceStrings, ceSubjectStrings, numberStrings);
+            listView.setAdapter(myAdapter);
+
+
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+    }
+
+    private String findSubject(String ceString) {
+
+        try {
+
+            String result = "";
+            MyConstant myConstant = new MyConstant();
+            GetSubjectWhereIdSubject getSubjectWhereIdSubject = new GetSubjectWhereIdSubject(getActivity());
+            getSubjectWhereIdSubject.execute(ceString, myConstant.getUrlGetSubjectWhereIdSub());
+            String strJSON = getSubjectWhereIdSubject.get();
+            Log.d("29novV4", "JSON ==> " + strJSON);
+
+            JSONArray jsonArray = new JSONArray(strJSON);
+            JSONObject jsonObject = jsonArray.getJSONObject(0);
+            result = jsonObject.getString("Subject");
+            getSubjectWhereIdSubject.cancel(true);
+            return result;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     @Nullable
