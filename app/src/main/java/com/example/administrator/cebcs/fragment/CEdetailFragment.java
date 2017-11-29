@@ -7,16 +7,23 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.example.administrator.cebcs.R;
+import com.example.administrator.cebcs.unity.GetCEwhereIDstudent;
+import com.example.administrator.cebcs.unity.MyConstant;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * Created by ASUS on 11/11/2560.
  */
 
-public class CEdetailFragment extends Fragment{
+public class CEdetailFragment extends Fragment {
 
     private String[] loginStrings;
+    private String tag = "29novV3";
 
     public static CEdetailFragment ceDetailInstance(String[] loginStrings) {
 
@@ -32,7 +39,45 @@ public class CEdetailFragment extends Fragment{
         super.onActivityCreated(savedInstanceState);
 
         loginStrings = getArguments().getStringArray("Login");
-        Log.d("11novV2", "idStudent ==>" + loginStrings[1]);
+        Log.d(tag, "idSt2 ==>" + loginStrings[2]);
+
+//        Create ListView
+        createListView();
+
+
+    }   // Main Method
+
+    private void createListView() {
+
+        ListView listView = getView().findViewById(R.id.livCE);
+        MyConstant myConstant = new MyConstant();
+
+        try {
+
+            GetCEwhereIDstudent getCEwhereIDstudent = new GetCEwhereIDstudent(getActivity());
+            getCEwhereIDstudent.execute(loginStrings[2], myConstant.getUrlGetCEwhereIDstudent());
+            String resultJSON = getCEwhereIDstudent.get();
+            Log.d(tag, "resultJSON ==> " + resultJSON);
+
+            JSONArray jsonArray = new JSONArray(resultJSON);
+            JSONObject jsonObject = jsonArray.getJSONObject(0);
+
+            String ceString = jsonObject.getString("CE");
+            Log.d(tag, "ce ==> " + ceString);
+
+
+            ceString = ceString.replace("[", "");
+            ceString = ceString.replace("]", "");
+            Log.d(tag, "ce ที่ตัด [] แล้ว ==> " + ceString);
+
+            String[] ceStrings = ceString.split(",");
+            for (int i=0; i<ceStrings.length; i+=1) {
+                Log.d(tag, "ceStrings[" + i + "] ==> " + ceStrings[i]);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 

@@ -86,6 +86,7 @@
 
             <!--Home-->
             <LinearLayout
+                android:layout_marginBottom="16dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -111,6 +112,7 @@
 
             <!--Detail Student-->
             <LinearLayout
+                android:layout_marginBottom="16dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
