@@ -46,12 +46,12 @@ public class DetailStudenFragment extends Fragment {
         TextView sectorTextView = getView().findViewById(R.id.txtSector);
         TextView classTextView = getView().findViewById(R.id.txtClass);
 
-        nameTextView.setText(loginStrings[2]);
-        surnameTextView.setText(loginStrings[3]);
+        nameTextView.setText(loginStrings[3]);
+        surnameTextView.setText(loginStrings[4]);
         idTextView.setText(loginStrings[1]);
-        majorTextView.setText(loginStrings[6]);
-        sectorTextView.setText(loginStrings[7]);
-        classTextView.setText(loginStrings[8]);
+        majorTextView.setText(loginStrings[7]);
+        sectorTextView.setText(loginStrings[8]);
+        classTextView.setText(loginStrings[9]);
 
     }
 

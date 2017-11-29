@@ -157,8 +157,8 @@ public class ServiceActivity extends AppCompatActivity {
         TextView nameTextView = (TextView) findViewById(R.id.txtName);
         TextView idTextView = (TextView) findViewById(R.id.txtID);
 
-        nameTextView.setText("ชื่อ " + loginStrings[2] + " " + loginStrings[3]);
-        idTextView.setText("รหัส " + loginStrings[1]);
+        nameTextView.setText("ชื่อ " + loginStrings[3] + " " + loginStrings[4]);
+        idTextView.setText("รหัสนักศึกษา " + loginStrings[1]);
 
     }
 
