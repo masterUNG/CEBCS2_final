@@ -52,8 +52,8 @@ public class MyAdapter extends BaseAdapter{
         numberTextView = view1.findViewById(R.id.txtNumber);
 
         numberTextView.setText(numberStrings[i]);
-        ceCodeTextView.setText(ceCodeStrings[1]);
-        ceSubjectTextView.setText(ceSubjectStrings[1]);
+        ceCodeTextView.setText(ceCodeStrings[i]);
+        ceSubjectTextView.setText(ceSubjectStrings[i]);
 
 
         return view1;
